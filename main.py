@@ -1,13 +1,18 @@
+
+from asyncio import subprocess
+from http import client, server
+from traceback import print_tb
+import wolframalpha
+from playsound import playsound
+import webbrowser
+import random
 import pyttsx3
 import datetime
 import speech_recognition as sr
 import wikipedia
-import webbrowser
-import random
-from playsound import playsound
-import datetime
 import os
-
+import requests
+import json
 engine = pyttsx3.init('espeak')
 voices = engine.getProperty('voices')
 
@@ -76,12 +81,46 @@ if __name__ ==  "__main__":
         elif 'i love you doraemon' in query:
             speak("I Love you too darling!")     
         elif 'who has made you?' in query:
-            speak("Harshit Gupta created me with love")  
+            speak("Harshit Gupta created me with love in August 2022")  
         elif 'play songs' in query:
             integer = random.randrange(0,7)
             playsound(lists[integer])    
-        elif 'the time' in query:
+        elif 'time' in query:
             strTime = datetime.datetime.now().strftime("%H:%M:%S")             
             speak(f"The time is, {strTime}") 
         elif 'log out' in query or 'sign out' in query:
             os.system('pkill -KILL -u harshit')    
+        elif 'search' in query:
+            statement = query.replace(" search","")
+            statement = statement.replace(" ","+")
+            pp= "q="
+            ee = "&t=h_&ia=web"
+            tabUrl = "https://www.duckduckgo.com/?"
+            print(tabUrl+pp+statement+ee)
+            webbrowser.open_new_tab(tabUrl+pp+statement+ee)   
+        elif 'what else can you do' in query:
+            speak("I can answer to computational and geographical questions. please ask me ")
+            question = takeCommand()
+            app_id="JQ6L9G-4G894PW2YG"
+            client = wolframalpha.Client('JQ6L9G-4G894PW2YG')
+            res = client.query(question)
+            answer = next(res.results).text
+            speak(answer)     
+        elif 'weather of' in query:
+            api_key="331857c0b5e9a4840523810a1392cfa3"
+            
+            weather_url = "http://api.openweathermap.org/data/2.5/weather?"
+            query = query.split(" ")
+            location = str(query[2])
+            url = weather_url + "appid=" + api_key + "&q=" + location 
+            js = requests.get(url).json() 
+            if js["cod"] != "404": 
+                 weather = js["main"] 
+                 temp = weather["temp"] 
+                 hum = weather["humidity"] 
+                 desc = js["weather"][0]["description"]
+                 resp_string = " The temperature in Kelvin is " + str(temp) + " The humidity is " + str(hum) + " and The weather description is "+ str(desc)
+                 print(resp_string)
+                 speak(resp_string)
+            else: 
+                 speak("City Not Found")     
