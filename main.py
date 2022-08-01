@@ -3,6 +3,10 @@ import datetime
 import speech_recognition as sr
 import wikipedia
 import webbrowser
+import random
+from playsound import playsound
+import datetime
+import os
 
 engine = pyttsx3.init('espeak')
 voices = engine.getProperty('voices')
@@ -46,7 +50,7 @@ def takeCommand():
 
 if __name__ ==  "__main__":  
     wishMe() #starting
-
+    lists = ["khairiyat.mp3", "besabriyaan.mp3" ,"dil.mp3", "hawayein.mp3"  ,"kun.mp3", "namo.mp3", "nights.mp3","stereo.mp3"]
     while True:
         
         query = takeCommand().lower()
@@ -72,4 +76,12 @@ if __name__ ==  "__main__":
         elif 'i love you doraemon' in query:
             speak("I Love you too darling!")     
         elif 'who has made you?' in query:
-            speak("Harshit Gupta created me with love")          
+            speak("Harshit Gupta created me with love")  
+        elif 'play songs' in query:
+            integer = random.randrange(0,7)
+            playsound(lists[integer])    
+        elif 'the time' in query:
+            strTime = datetime.datetime.now().strftime("%H:%M:%S")             
+            speak(f"The time is, {strTime}") 
+        elif 'log out' in query or 'sign out' in query:
+            os.system('pkill -KILL -u harshit')    
