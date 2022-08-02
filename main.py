@@ -14,6 +14,7 @@ import os
 import requests
 import pywhatkit
 import json
+import qrcode
 
 import pyautogui as pt
 engine = pyttsx3.init('espeak')
@@ -38,12 +39,12 @@ def wishMe():
 
     speak("Hello , I am doraemon. How can I help you?") # created on 1 August 2022
 
-def takeCommand():
+def takeCommand(dur):
     r = sr.Recognizer()
     with sr.Microphone() as source:
         print("Doraemon in listening...")
         r.pause_threshold = 1
-        audio = r.record(source,4)
+        audio = r.record(source,dur)
         
 
     try:
@@ -56,13 +57,32 @@ def takeCommand():
         return "None"   
     return query   
 
+
+def takeMessage():
+    r = sr.Recognizer()
+    with sr.Microphone() as source:
+        print("Doraemon in listening...")
+        r.pause_threshold = 10
+        audio = r.listen(source,None,120)
+        
+
+    try:
+        print("Understanding...")
+        query = r.recognize_google(audio,language='en-in') 
+        print(f"User said: {query}\n")
+
+    except Exception as e:
+        print("Say that again please")
+        return "None"   
+    return query       
+
 if __name__ ==  "__main__":  
     wishMe() #starting
     lists = ["khairiyat.mp3", "besabriyaan.mp3" ,"dil.mp3", "hawayein.mp3"  ,"kun.mp3", "namo.mp3", "nights.mp3","stereo.mp3"]
     while True:
-        
-        query = takeCommand().lower()
-        
+       
+        query = takeCommand(4).lower()
+
         if 'wikipedia' in query:
             speak('Searching ....')
             query = query.replace("wikipedia","")
@@ -104,7 +124,7 @@ if __name__ ==  "__main__":
             webbrowser.open_new_tab(tabUrl+pp+statement+ee)   
         elif 'what else can you do' in query:
             speak("I can answer to computational and geographical questions. please ask me ")
-            question = takeCommand()
+            question = takeCommand(10)
             app_id="JQ6L9G-4G894PW2YG"
             client = wolframalpha.Client('JQ6L9G-4G894PW2YG')
             res = client.query(question)
@@ -129,10 +149,36 @@ if __name__ ==  "__main__":
             else: 
                  speak("City Not Found")     
         elif 'send message' in query:
-            speak("Please Write the number")
-            number = input()
-            speak("Please write what should I send")   
-            message = input()
-            time = datetime.datetime.now()
-            pywhatkit.sendwhatmsg("+91"+number, message,time.hour,(time.minute+2),15,True,5)
+            speak("How do you want to send message, by audio or by typing?")
+            query = takeCommand(4).lower()
+            if 'typing' in query:
+               speak("Please Write the number")
+               number = input()
+               speak("Please write what should I send")   
+               message = input()
+               time = datetime.datetime.now()
+               pywhatkit.sendwhatmsg_instantly("+91"+number, message,15,True)
+            elif 'audio' in query :
+                speak("Please tell me the number.")
+                number = takeCommand(12)
+                speak("Please send me the message you want me to convey for you")
+                message = takeMessage()
+                time = datetime.datetime.now()
+                pywhatkit.sendwhatmsg_instantly("+91"+number, message,15,True)
+        elif 'book pdf' in query:
+            speak("Which book you want to have?")
+            book = takeCommand(8)
+            book.replace(" ","%20")
+            webbrowser.open("https://1lib.in/s/book")   
+        elif 'encode' in query:
+            speak("Please write what you want to encode.")
+            xx= input()
+            
+            img = qrcode.make(xx)
+            img.save("qr.png", "PNG")
+            
+           
+
+
+
             
