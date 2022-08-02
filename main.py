@@ -7,12 +7,15 @@ from playsound import playsound
 import webbrowser
 import random
 import pyttsx3
-import datetime
+import datetime 
 import speech_recognition as sr
 import wikipedia
 import os
 import requests
+import pywhatkit
 import json
+
+import pyautogui as pt
 engine = pyttsx3.init('espeak')
 voices = engine.getProperty('voices')
 
@@ -40,7 +43,7 @@ def takeCommand():
     with sr.Microphone() as source:
         print("Doraemon in listening...")
         r.pause_threshold = 1
-        audio = r.record(source,5)
+        audio = r.record(source,4)
         
 
     try:
@@ -59,6 +62,7 @@ if __name__ ==  "__main__":
     while True:
         
         query = takeCommand().lower()
+        
         if 'wikipedia' in query:
             speak('Searching ....')
             query = query.replace("wikipedia","")
@@ -124,3 +128,11 @@ if __name__ ==  "__main__":
                  speak(resp_string)
             else: 
                  speak("City Not Found")     
+        elif 'send message' in query:
+            speak("Please Write the number")
+            number = input()
+            speak("Please write what should I send")   
+            message = input()
+            time = datetime.datetime.now()
+            pywhatkit.sendwhatmsg("+91"+number, message,time.hour,(time.minute+2),15,True,5)
+            
