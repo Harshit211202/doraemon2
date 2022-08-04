@@ -1,0 +1,12 @@
+wolframalpha
+playsound
+webbrowser
+random
+pyttsx3
+datetime
+speech_recognition
+wikipedia
+requests
+pywhatkit
+qrcode
+pyautogui
