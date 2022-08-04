@@ -71,8 +71,8 @@ if __name__ == "__main__":
              "namo.mp3", "nights.mp3", "stereo.mp3"]  # list of some random songs i have added
     while True:
         
-        # taking the command for 7 seconds and then converting to lower case
-        query = takeCommand(7).lower()
+        # taking the command for 5 seconds and then converting to lower case
+        query = takeCommand(5).lower()
 
         # searching in wikipedia and then speaking and printing 4 lines from it.
         if 'wikipedia' in query:
@@ -191,3 +191,6 @@ if __name__ == "__main__":
             s.connect(("8.8.8.8", 80))
             print(s.getsockname()[0])
             s.close()    
+        elif 'goodbye' in query:
+            speak("Goodbye dear. Hope we'll meet soon.")
+            break
