@@ -18,7 +18,8 @@ import json
 import qrcode
 import pyautogui as pt
 import socket
-
+from dotenv import load_dotenv
+load_dotenv()
 
 engine = pyttsx3.init('espeak')
 voices = engine.getProperty('voices')
@@ -125,18 +126,17 @@ if __name__ == "__main__":
                 tabUrl = "https://www.duckduckgo.com/?"
                 print(tabUrl+pp+que+ee)
                 webbrowser.open_new_tab(tabUrl+pp+que+ee)
-        elif 'geography' in query:  # geo questions from api
+        elif 'answer' in query:  # geo questions from api
             speak(
                 "I can answer to computational and geographical questions. please ask me ")
             question = takeCommand(10)
-            app_id = "JQ6L9G-4G894PW2YG"
+            app_id = os.getenv('answer')
             client = wolframalpha.Client('JQ6L9G-4G894PW2YG')
             res = client.query(question)
             answer = next(res.results).text
             speak(answer)
         elif 'weather of' in query:  # asking for weather of a city
-            api_key = "331857c0b5e9a4840523810a1392cfa3"
-
+            api_key = os.getenv('weather')
             weather_url = "http://api.openweathermap.org/data/2.5/weather?"
             query = query.split(" ")
             location = str(query[2])
