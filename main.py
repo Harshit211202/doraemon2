@@ -132,12 +132,12 @@ if __name__ == "__main__":
                 "I can answer to computational and geographical questions. please ask me ")
             question = takeCommand(10)
             app_id = os.getenv('answer')
-            client = wolframalpha.Client('JQ6L9G-4G894PW2YG')
+            client = wolframalpha.Client(app_id)
             res = client.query(question)
             answer = next(res.results).text
             speak(answer)
         elif 'weather of' in query:  # asking for weather of a city
-            api_key = os.getenv('weather')
+            api_key = os.getenv('api_key')
             weather_url = "http://api.openweathermap.org/data/2.5/weather?"
             query = query.split(" ")
             location = str(query[2])
