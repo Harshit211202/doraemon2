@@ -1,12 +1,11 @@
 wolframalpha
 playsound
-webbrowser
-random
 pyttsx3
 datetime
-speech_recognition
+SpeechRecognition
 wikipedia
 requests
 pywhatkit
 qrcode
 pyautogui
+python-dotenv
