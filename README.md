@@ -26,6 +26,7 @@ It can do a lot of cool things, some of them being:
 - send whatsapp message to a given number.(Just say 'send message' in query and it will ask you whether you want to send message by typing or by speaking)
 - Can encode a website link, any text in the form of qr code.(Just say 'encode' in query)
 - Can search for a book pdf via z-lib.(Just say 'book pdf' in query)
+- say 'horoscope' and then tell your sign to get your horoscope for the day!
 - say 'goodbye' to deactivate
 - say 'log out' to log out user form linux.
 

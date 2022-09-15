@@ -8,7 +8,7 @@ from playsound import playsound
 import webbrowser
 import random
 import pyttsx3
-
+import pyaztro
 import datetime
 import speech_recognition as sr
 import wikipedia
@@ -67,12 +67,12 @@ def takeCommand(dur):
 
 
 if __name__ == "__main__":
-   
+
     wishMe()  # starting with a wishing
     lists = ["khairiyat.mp3", "besabriyaan.mp3", "dil.mp3", "hawayein.mp3", "kun.mp3",
              "namo.mp3", "nights.mp3", "stereo.mp3"]  # list of some random songs i have added
     while True:
-        
+
         # taking the command for 5 seconds and then converting to lower case
         query = takeCommand(5).lower()
 
@@ -106,8 +106,8 @@ if __name__ == "__main__":
         elif 'time' in query:  # asking for time
             strTime = datetime.datetime.now().strftime("%H:%M:%S")
             speak(f"The time is, {strTime}")
-        elif 'date' in query: #asking date
-            print(datetime.date.today())    
+        elif 'date' in query:  # asking date
+            print(datetime.date.today())
         elif 'log out' in query or 'sign out' in query:  # logging out from my linux system
             os.system('pkill -KILL -u harshit')
         elif 'search' in query:  # searching on google or duckduck go
@@ -187,11 +187,26 @@ if __name__ == "__main__":
 
             img = qrcode.make(xx)
             img.save("qr.png", "PNG")
-        elif 'ip' in query:   #ip address
+        elif 'ip' in query:  # ip address
             s = socket.socket(socket.AF_INET, socket.SOCK_DGRAM)
             s.connect(("8.8.8.8", 80))
             print(s.getsockname()[0])
-            s.close()    
+            s.close()
+        elif 'horoscope' in query:  # Beleive in horoscope?
+            speak("For which sign you want to get horoscope?")
+            ans = takeCommand(5)
+            sign_person = pyaztro.Aztro(sign=ans)
+
+            print( ans , ': \n',
+                  'Sign:',             sign_person.sign,          '\n',
+                  'Current date:',     sign_person.current_date,  '\n',
+                  'Date range:',       sign_person.date_range,    '\n',
+                  'Sign description:', sign_person.description,   '\n',
+                  'Mood:',             sign_person.mood,          '\n',
+                  'Compatibility:',    sign_person.compatibility, '\n',
+                  'Lucky number:',     sign_person.lucky_number,  '\n',
+                  'Lucky time:',       sign_person.lucky_time,    '\n',
+                  'Lucky color:',      sign_person.color,       2*'\n',)
         elif 'goodbye' in query:
             speak("Goodbye dear. Hope we'll meet soon.")
             break
