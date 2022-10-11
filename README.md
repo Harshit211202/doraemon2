@@ -27,6 +27,8 @@ It can do a lot of cool things, some of them being:
 - Can encode a website link, any text in the form of qr code.(Just say 'encode' in query)
 - Can search for a book pdf via z-lib.(Just say 'book pdf' in query)
 - say 'horoscope' and then tell your sign to get your horoscope for the day!
+- say 'take a photo' and then it will take your photo!
+- Got some personal stuff to do? say 'stop listening' or 'don't listen' and it will stop listening for given time.
 - say 'goodbye' to deactivate
 - say 'log out' to log out user form linux.
 

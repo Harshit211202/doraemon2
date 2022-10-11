@@ -9,3 +9,5 @@ pywhatkit
 qrcode
 pyautogui
 python-dotenv
+ecapture
+time
