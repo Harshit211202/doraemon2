@@ -20,7 +20,10 @@ import qrcode
 import pyautogui as pt
 import socket
 from dotenv import load_dotenv
-load_dotenv()
+from ecapture import ecapture as ec
+import time
+
+
 
 engine = pyttsx3.init('espeak')
 voices = engine.getProperty('voices')
@@ -75,8 +78,7 @@ if __name__ == "__main__":
 
         # taking the command for 5 seconds and then converting to lower case
         query = takeCommand(5).lower()
-
-        # searching in wikipedia and then speaking and printing 4 lines from it.
+       # searching in wikipedia and then speaking and printing 4 lines from it.
         if 'wikipedia' in query:
             speak('Searching ....')
             query = query.replace("wikipedia", "")
@@ -98,7 +100,7 @@ if __name__ == "__main__":
             webbrowser.open("home.iitk.ac.in/~guptah20/")
         elif 'i love you doraemon' in query:  # pouring love
             speak("I Love you too !")
-        elif 'who made you?' in query:  # credits
+        elif 'who made you' in query:  # credits
             speak("Harshit Gupta created me with love in August 2022")
         elif 'song' in query:  # playing random song
             integer = random.randrange(0, 7)
@@ -110,6 +112,8 @@ if __name__ == "__main__":
             print(datetime.date.today())
         elif 'log out' in query or 'sign out' in query:  # logging out from my linux system
             os.system('pkill -KILL -u harshit')
+        elif "take a photo" in query:
+            ec.capture(0, "Doraemon", "img.jpg")  # looking good? take a photo and find out!
         elif 'search' in query:  # searching on google or duckduck go
             speak("Where do you want to search? In google or in duck duck go?")
             s_engine = takeCommand(5).lower()
@@ -136,6 +140,11 @@ if __name__ == "__main__":
             res = client.query(question)
             answer = next(res.results).text
             speak(answer)
+        elif "don't listen" in query or "stop listening" in query:   # want to do some personal work before using doraemon?
+            speak("for how much time you want to stop me from listening you")
+            a = int(takeCommand(3))
+            time.sleep(a)
+
         elif 'weather of' in query:  # asking for weather of a city
             api_key = os.getenv('api_key')
             weather_url = "http://api.openweathermap.org/data/2.5/weather?"
@@ -165,7 +174,7 @@ if __name__ == "__main__":
                 message = input()
                 time = datetime.datetime.now()
                 pywhatkit.sendwhatmsg_instantly(
-                    "+91"+number, message, 15, True)
+                    "+91"+number, message, 30, True)
             elif 'audio' in query:
                 speak("Please tell me the number.")
                 number = takeCommand(12)
@@ -174,7 +183,7 @@ if __name__ == "__main__":
 
                 time = datetime.datetime.now()
                 pywhatkit.sendwhatmsg_instantly(
-                    "+91"+number, message, 15, True)
+                    "+91"+number, message, 30, True)
         elif 'book pdf' in query:  # searching for a book pdf on z-lib
             speak("Which book you want to have?")
             book = takeCommand(8)

@@ -1,4 +1,4 @@
+.gitignore
 .env
 PyWhatKit_DB.txt
 Git_token
-.gitignore

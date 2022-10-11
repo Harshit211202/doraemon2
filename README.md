@@ -46,7 +46,7 @@ To run this program you will require a bunch of API keys. Register your API key 
 - Enjoy !!!!
 
 ## Future Improvements
-- Generalized conversations can be made possible by incorporating Natural Language Processing
+- Generalized conversations can be made possible by incorporating Natural Language Processing, can be made a learning model by incorporating ML.
 - GUI can be made 
 - More functionalities can be added like google calender and maps.
 - More websites can be added
