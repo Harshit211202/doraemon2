@@ -22,7 +22,10 @@ import socket
 from dotenv import load_dotenv
 from ecapture import ecapture as ec
 import time
-
+import nasapy
+import urllib.request
+from IPython.display import Image,display,Audio
+from PIL import Image
 
 
 engine = pyttsx3.init('espeak')
@@ -219,3 +222,32 @@ if __name__ == "__main__":
         elif 'goodbye' in query:
             speak("Goodbye dear. Hope we'll meet soon.")
             break
+        elif 'picture of day' in query: # an astronomy fan?
+            nasa = os.getenv('nasa')
+            nasax = nasapy.Nasa(key = nasa)
+            d = datetime.date.today().strftime('%Y-%m-%d')
+            apod = nasax.picture_of_the_day(date=d, hd=True)
+            if(apod["media_type"] == "image"):
+               if("hdurl" in apod.keys()):
+                   title = d + "_" + apod["title"].replace(" ","_").replace(":","_") + ".jpg"
+                   image_dir = "./Astro_Images"
+                   dir_res = os.path.exists(image_dir)
+                   if (dir_res==False):
+                     os.makedirs(image_dir)
+
+                   urllib.request.urlretrieve(url = apod["hdurl"] , filename = os.path.join(image_dir,title))
+                   
+                   img = Image.open( os.path.join(image_dir,title))
+                   img.show()
+                   print("Date image released: ",apod["date"])
+                   print("\n")
+                   print("This image is owned by: ",apod["copyright"])
+                   print("\n")
+                   print("Title of the image: ",apod["title"])
+                   print("\n")
+                   print("Description for the image: ",apod["explanation"])
+                   print("\n")
+                  
+                   
+            else:
+                print("Sorry, Image not available!")

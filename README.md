@@ -28,7 +28,8 @@ It can do a lot of cool things, some of them being:
 - Can search for a book pdf via z-lib.(Just say 'book pdf' in query)
 - say 'horoscope' and then tell your sign to get your horoscope for the day!
 - say 'take a photo' and then it will take your photo!
-- Got some personal stuff to do? say 'stop listening' or 'don't listen' and it will stop listening for given time.
+- Got some personal stuff to do? say 'stop listening' or 'don't listen' and it will stop listening for given time
+- an astronomy fan? just say 'picture of day' and let it find the NASA picture of day! It will also open up and save the picture with displaying some info for you.
 - say 'goodbye' to deactivate
 - say 'log out' to log out user form linux.
 
@@ -38,6 +39,7 @@ To run this program you will require a bunch of API keys. Register your API key 
 
 - [OpenWeatherMap API](https://openweathermap.org/api)
 - [Wolframalpha](https://www.wolframalpha.com/)
+- [NASA](https://api.nasa.gov/)
   
 ## Installation
 

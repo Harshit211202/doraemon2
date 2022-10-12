@@ -11,3 +11,7 @@ pyautogui
 python-dotenv
 ecapture
 time
+nasapy
+Ipython
+pillow
+
