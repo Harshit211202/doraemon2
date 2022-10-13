@@ -3,6 +3,7 @@ from asyncio import subprocess
 from http import client, server
 from time import sleep
 from traceback import print_tb
+from cv2 import haveImageReader
 import wolframalpha
 from playsound import playsound
 import webbrowser
@@ -25,7 +26,9 @@ import time
 import nasapy
 import urllib.request
 from IPython.display import Image,display,Audio
+from gtts import gTTS
 from PIL import Image
+load_dotenv('.env') 
 
 
 engine = pyttsx3.init('espeak')
@@ -224,7 +227,8 @@ if __name__ == "__main__":
             break
         elif 'picture of day' in query: # an astronomy fan?
             nasa = os.getenv('nasa')
-            nasax = nasapy.Nasa(key = nasa)
+            
+            nasax = nasapy.Nasa(key =nasa)
             d = datetime.date.today().strftime('%Y-%m-%d')
             apod = nasax.picture_of_the_day(date=d, hd=True)
             if(apod["media_type"] == "image"):
@@ -235,14 +239,16 @@ if __name__ == "__main__":
                    if (dir_res==False):
                      os.makedirs(image_dir)
 
+
                    urllib.request.urlretrieve(url = apod["hdurl"] , filename = os.path.join(image_dir,title))
-                   
-                   img = Image.open( os.path.join(image_dir,title))
-                   img.show()
+                #    img = Image.open( os.path.join(image_dir,title))
+                #    img.show()
+                   webbrowser.open(os.path.join(image_dir,title))
                    print("Date image released: ",apod["date"])
                    print("\n")
-                   print("This image is owned by: ",apod["copyright"])
-                   print("\n")
+                   if("copyright" in apod.keys()):
+                    print("This image is owned by: ",apod["copyright"])
+                    print("\n")
                    print("Title of the image: ",apod["title"])
                    print("\n")
                    print("Description for the image: ",apod["explanation"])
@@ -251,3 +257,28 @@ if __name__ == "__main__":
                    
             else:
                 print("Sorry, Image not available!")
+        elif 'mars rover' in query: # wanna see puctures of mars rover curiosity?
+             har = os.getenv('api_nasa')
+            
+             f = "https://api.nasa.gov/mars-photos/api/v1/rovers/curiosity/photos?sol=1000&camera=fhaz&"
+             f = f + "api_key=" + har
+             print(f)
+             data = requests.get(f)
+             a = json.loads(data.text)
+             print(a)
+             for i in a["photos"]:
+               print(i, "\n\n\n")
+    
+             b = a["photos"][0]["img_src"]
+    
+             webbrowser.open(b)
+        elif 'fun' in query: # Getting bored? Doraemon is here!
+            f = "http://www.boredapi.com/api/activity/"
+            data = requests.get(f)
+            json_data = data.json()
+            act_data = json_data["activity"]
+            act_type = json_data["type"]
+            speak(act_data,)
+            print(act_data)
+
+            speak("It is of type" + act_type)

@@ -30,6 +30,7 @@ It can do a lot of cool things, some of them being:
 - say 'take a photo' and then it will take your photo!
 - Got some personal stuff to do? say 'stop listening' or 'don't listen' and it will stop listening for given time
 - an astronomy fan? just say 'picture of day' and let it find the NASA picture of day! It will also open up and save the picture with displaying some info for you.
+- say 'mars rover' to see photos by mars curiosity rover
 - say 'goodbye' to deactivate
 - say 'log out' to log out user form linux.
 
