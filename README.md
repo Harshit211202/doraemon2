@@ -47,6 +47,10 @@ To run this program you will require a bunch of API keys. Register your API key 
 - First clone the repo
 - Navigate to the directory of your project
 - Install all the requirements by just hitting ``` pip install -r requirements.txt ```
+- Also type some of these commands to install required packages -- 
+            ``` sudo apt-get install python3-tk python3-dev ```
+            ```  sudo apt-get install espeak ```
+            ``` sudo apt-get install portaudio19-dev ```
 - Run the program by ``` python main.py ```
 - Enjoy !!!!
 

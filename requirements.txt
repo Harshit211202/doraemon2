@@ -10,8 +10,9 @@ qrcode
 pyautogui
 python-dotenv
 ecapture
-time
 nasapy
 Ipython
 pillow
-
+pyaztro
+gtts
+PyAudio
