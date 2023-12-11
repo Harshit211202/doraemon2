@@ -11,6 +11,7 @@
 
 It can do a lot of cool things, some of them being:
 
+- (Added later) Added "nobita" as a wake up word so it will only perform action when we say nobita.
 - Greet user
 - After this you have to give him query in the form of voice command.
 - Tell current time and date (Just say 'time'/'date' in query)
