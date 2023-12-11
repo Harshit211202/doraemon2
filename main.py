@@ -36,6 +36,8 @@ voices = engine.getProperty('voices')
 
 engine.setProperty('voices', voices[20].id)  # voice of my doraemom!
 
+WAKE = "nobita"
+
 
 def speak(audio):  # speak function for doraemon
     engine.say(audio)
@@ -77,11 +79,15 @@ def takeCommand(dur):
 
 if __name__ == "__main__":
 
-    wishMe()  # starting with a wishing
     lists = ["khairiyat.mp3", "besabriyaan.mp3", "dil.mp3", "hawayein.mp3", "kun.mp3",
              "namo.mp3", "nights.mp3", "stereo.mp3"]  # list of some random songs i have added
     while True:
+      text = takeCommand(3).lower()
 
+      if text.count(WAKE) > 0:
+        speak("I am ready")
+
+        wishMe()  # starting with a wishing
         # taking the command for 5 seconds and then converting to lower case
         query = takeCommand(5).lower()
        # searching in wikipedia and then speaking and printing 4 lines from it.
