@@ -52,6 +52,7 @@ To run this program you will require a bunch of API keys. Register your API key 
             ``` sudo apt-get install python3-tk python3-dev ```
             ```  sudo apt-get install espeak ```
             ``` sudo apt-get install portaudio19-dev ```
+            '''sudo apt-get install pulseaudio-utils'''
 - Run the program by ``` python main.py ```
 - Enjoy !!!!
 
